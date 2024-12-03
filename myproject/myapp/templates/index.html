@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>done</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+ 
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  
+
+<link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+
+  <!-- Main CSS File -->
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+
+  <!-- =======================================================
+  * Template Name: QuickStart
+  * Template URL: https://bootstrapmade.com/quickstart-bootstrap-startup-website-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      <!-- Logo and navigation menu -->
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto">
+          <!-- Replace logo path with the static file path -->
+          <img src="{% static 'assets/img/logo.png' %}" alt="">
+          <h1 class="sitename">SignConversion</h1>
+      </a>
+      
+      <nav id="navmenu" class="navmenu">
+          <ul>
+             
+              <li><a href="{% url 'home' %}" class="active">Home</a></li>
+
+              <li><a href="#about">About</a></li>
+              <li><a href="#features">Features</a></li>
+              {% if user.is_authenticated %}
+
+            {% endif %}
+              <li><a href="#contact">Contact</a></li>
+
+          </ul>
+          
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      {% if user.is_authenticated %}
+      <a  href="{% url 'logout' %}">
+        <button class="btn-getstarted">Logout</button>
+      </a>      
+      {% else %}
+
+      <a  href="{% url 'login' %}">
+        <button class="btn-getstarted">Login</button>
+      </a>
+      
+      <a  href="{% url 'signup' %}">
+        <button class="btn-getstarted">Signup</button>
+      </a>
+      {% endif %}
+  </header>
+
+  <main class="main">
+    {% if user.is_authenticated %}
+    <section id="services" class="services section light-background">
+ 
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2 style="margin-top: 70px;">Heyy!!</h2>
+        <p>Explore that another world of sign language with multiple functionality...!!!</p>
+      </div><!-- End Section Title -->
+ 
+      <div class="container">
+ 
+        <div class="row g-5">
+ 
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <a href="{% url 'videocheck' %}" class="service-item item-cyan position-relative stretched-link">
+              <i class="bi bi-activity icon"></i>
+               <div>
+                    <h3>Real-Time Communication.</h3>
+                    <p>Instant translation for real-time communication, making conversations between sign language users and non-sign language users smooth and effortless.</p>
+                    <span class="read-more">tryyy </span>
+                  </div>
+            </a>
+         </div><!-- End Service Item -->
+        
+ 
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <!-- Wrap the entire service item in an anchor tag to make the whole block clickable -->
+            <a href="{% url 'tryyy' %}" class="service-item item-orange position-relative">
+              <i class="bi bi-broadcast icon"></i>
+              <div>
+                <h3>Speech-to-Sign Conversion</h3>
+                <p>Convert spoken English into written text to facilitate communication for users with hearing impairments.</p>
+                <span class="read-more">tryyy </span>
+              </div>
+            </a>
+          </div><!-- End Service Item -->
+          
+ 
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <!-- Wrap the entire service item in an anchor tag to make the whole block clickable -->
+            <a href="{% url 'text_to_sign' %}" class="service-item item-teal position-relative">
+              <i class="bi bi-easel icon"></i>
+              <div>
+                <h3>Text-to-Sign</h3>
+                <p>For users with visual impairments, our platform can read out translated sign language or text aloud for better accessibility.</p>
+                <span class="read-more">Tryy </span>
+              </div>
+            </a>
+          </div><!-- End Service Item -->
+          
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item item-red position-relative">
+              <i class="bi bi-bounding-box-circles icon"></i>
+              <div>
+                <h3>Custom Sign Language Lessons
+ 
+                </h3>
+                <p>Learn the basics of sign language through interactive lessons, tailored to different levels of expertise.
+                </p>
+                <a href="#" class="read-more stretched-link">Learn More <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </div><!-- End Service Item -->
+  
+        </div>
+ 
+      </div>
+ 
+    </section><!-- /Services Section -->
+    {% else %}
+ 
+
+    <!-- Hero Section -->
+
+    <section id="hero" class="hero section">
+      <div class="hero-bg">
+       
+        <img src="{% static 'assets/img/hero-bg-light.webp' %}" alt="">
+      </div>
+      <div class="container text-center">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+          <h1 data-aos="fade-up">Welcome to <span>SignConversion</span></h1>
+          <p data-aos="fade-up" data-aos-delay="100">Quickly start your project now and set the stage for success<br></p>
+          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+            <a href="#about" class="btn-get-started">Get Started</a>
+            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center">
+              <i class="bi bi-play-circle"></i><span>Watch Video</span>
+            </a>
+          </div>
+        
+          <img src="{% static 'assets/img/hero-services-img.webp' %}" class="img-fluid hero-img" alt="" data-aos="zoom-out" data-aos-delay="300">
+        </div>
+      </div>
+    </section>
+    {% endif %}
+       <!-- Services Section -->
+
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+            <p class="who-we-are">Why Choose Us?</p>
+            <h3>Bridging the Communication Gap with Ease</h3>
+            <p class="fst-italic">
+              we believe in breaking down barriers and making communication accessible to all. Our platform offers seamless English to Sign Language conversions and vice versa, empowering users to connect and share information with greater inclusivity.
+            </p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> <span>Easy to Use: Convert written English into various sign languages effortlessly.
+                .</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Real-time Translation: Get fast and accurate translations from English to Sign Language and back in seconds.
+              </span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Inclusive Communication: Designed to help both the hearing and the deaf community communicate with ease.
+              </span></li>
+            </ul>
+            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+
+          <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
+            <div class="row gy-4">
+              <div class="col-lg-6">
+                <img src="{% static 'assets/img/about-company-1.jpg' %}" alt="About Company">
+              </div>
+              <div class="col-lg-6">
+                <div class="row gy-4">
+                  <div class="col-lg-12">
+                    <img src="{% static 'assets/img/deaf.webp' %}" alt="About Company">
+                  </div>
+                  <div class="col-lg-12">
+                    <img src="{% static 'assets/img/deaf.jpg' %}" alt="About Company">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- /About Section -->
+
+
+
+    </section><!-- /Clients Section -->
+
+    <!-- Features Section -->
+    <section id="features" class="features section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Features</h2>
+        <p>Crisp features of SignConversion</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+        <div class="row justify-content-between">
+
+          <div class="col-lg-5 d-flex align-items-center">
+
+            <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
+              <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                  <i class="bi bi-binoculars"></i>
+                  <div>
+                    <h4 class="d-none d-lg-block">Voice-to-Text Integration:</h4>
+                    <p>
+                      Convert spoken English into written text for seamless communication.
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+                  <i class="bi bi-box-seam"></i>
+                  <div>
+                    <h4 class="d-none d-lg-block">Accessible to All: </h4>
+                    <p>
+                      Designed to be inclusive, supporting both the deaf and hearing communities
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+                  <i class="bi bi-brightness-high"></i>
+                  <div>
+                    <h4 class="d-none d-lg-block">Free & Premium Options: </h4>
+                    <p>
+                      Access basic translations for free or unlock advanced features with a premium plan.
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </ul><!-- End Tab Nav -->
+
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+              <div class="tab-pane fade active show" id="features-tab-1">
+                <img src="{% static 'assets/img/dumb2.jpg' %}"class="img-fluid" alt="">
+
+              </div><!-- End Tab Content Item -->
+
+              <div class="tab-pane fade" id="features-tab-2">
+                <img src="{% static 'assets/img/tebb.jpg' %}"class="img-fluid" alt="">
+
+              </div><!-- End Tab Content Item -->
+
+              <div class="tab-pane fade" id="features-tab-3">
+                <img src="{% static 'assets/img/tabs-3.jpg' %}"class="img-fluid" alt="">
+
+              </div><!-- End Tab Content Item -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Features Section -->
+
+    <!-- Features Details Section -->
+    <section id="features-details" class="features-details section">
+
+      <div class="container">
+
+        <div class="row gy-4 justify-content-between features-item">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          
+            <img src="{% static 'assets/img/tebb.jpg' %}"class="img-fluid" alt="">
+
+          </div>
+
+          <div class="col-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="content">
+              <h3>User-Friendly Interface</h3>
+              <p>Our platform is designed with simplicity and ease in mind. Whether you're new to sign language or a seasoned user, you'll find our interface intuitive and easy to navigate.
+                 The streamlined design ensures that all the tools you need are at your fingertips, with minimal effort required to perform translations. With a clean layout, clear instructions, and accessible buttons, getting from text to sign language (or vice versa) has never been more straightforward.
+
+
+              </p>
+              <a href="#" class="btn more-btn">Learn More</a>
+            </div>
+          </div>
+
+        </div><!-- Features Item -->
+
+
+
+      </div>
+
+    </section><!-- /Features Details Section -->
+
+    
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>If You have any query please contact us!!</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+              <i class="bi bi-geo-alt"></i>
+              <h3>Address</h3>
+              <p>Khandwa Naka, Ganesh Nagar Indore ,MP 452020
+              </p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-telephone"></i>
+              <h3>Call Us</h3>
+              <p>+1 5589 55488 55</p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-envelope"></i>
+              <h3>Email Us</h3>
+              <p>info@example.com</p>
+            </div>
+          </div><!-- End Info Item -->
+
+        </div>
+
+        <div class="row gy-4 mt-1">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29451.897540033904!2d75.85670237205234!3d22.672900660350635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcbe8589dce5%3A0xf79cf7f281d233c2!2sKhandwa%20Naka%2C%20Bhavna%20Nagar%2C%20Indore%2C%20Madhya%20Pradesh%20452020!5e0!3m2!1sen!2sin!4v1733253212281!5m2!1sen!2sin"  frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div><!-- End Google Maps -->
+
+          <div class="col-lg-6">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">SignConversion</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Khandwa Naka, Ganesh Nagar
+            </p>
+            <p> Indore ,MP 452020</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>tryy@example.com</span></p>
+          </div>
+           <!-- Load the static files template tag -->
+
+          <div class="social-links d-flex mt-4">
+            <!-- Direct social media links -->
+            <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="bi bi-linkedin"></i></a>
+        </div>
+        
+          
+          </div>
+          
+          <!-- Useful Links Section -->
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="{% url 'home' %}">Home</a></li>
+            </ul>
+          </div>
+          
+          
+          
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our education !!!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+       <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by using <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files --> <!-- Load the static files template tag -->
+
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <!-- Main JS File -->
+  
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+</body>
+
+</html>

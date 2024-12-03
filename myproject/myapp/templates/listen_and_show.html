@@ -1,0 +1,66 @@
+<!-- listen_and_show.html -->
+<html>
+<head>
+  <script>
+    let mediaRecorder;
+    let audioChunks = [];
+
+    // Start recording when the "Start Listening" button is clicked
+    function startRecording() {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data);
+            };
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const formData = new FormData();
+                formData.append('audio', audioBlob, 'audio.wav');
+
+                // Send the audio to the Django server via AJAX
+                fetch('{% url "speech_to_text" %}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}' // CSRF protection
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Once the server responds, display the result (image or gif)
+                    if (data.image) {
+                        document.getElementById('result').innerHTML = `<img src="${data.image}" alt="Sign Language Image" />`;
+                    } else if (data.gif_url) {
+                        document.getElementById('result').innerHTML = `<img src="${data.gif_url}" alt="Sign Language GIF" />`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            };
+            mediaRecorder.start();
+        })
+        .catch(err => {
+            console.error('Failed to start recording:', err);
+        });
+    }
+
+    // Stop recording when the "Stop Listening" button is clicked
+    function stopRecording() {
+        mediaRecorder.stop();
+    }
+  </script>
+</head>
+<body>
+
+  <h2>Text-to-Speech Service</h2>
+
+  <button onclick="startRecording()">Start Listening</button>
+  <button onclick="stopRecording()">Stop Listening</button>
+
+  <!-- This is where the result will be displayed (image or gif) -->
+  <div id="result"></div>
+
+</body>
+</html>

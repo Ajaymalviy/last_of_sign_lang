@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #3a3a3a;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: rgb(56, 141, 168);
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color:rgb(56, 141, 168);
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: 2px solid rgb(56, 141, 168);
+            color: rgb(56, 141, 168);
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: rgb(56, 141, 168)
+            color: white;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        /* Horizontal Layout for Images */
+        .images-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px; /* Space between images */
+            margin-top: 20px;
+        }
+
+        .images-container img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .message {
+            font-size: 16px;
+            color: #e74c3c;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Enter Text</h1>
+        <form method="POST" action="{% url 'text_to_sign' %}">
+            {% csrf_token %}
+            <label for="inputText">Text Input:</label><br>
+            <input type="text" id="inputText" name="inputText" required><br><br>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if gif_url %}
+        <h2>Matching GIF:</h2>
+        <div class="images-container" style="text-align: center;">
+            <img src="{{ gif_url }}" alt="GIF" style="width: 50vw; height: 50vh; object-fit: contain;">
+        </div>
+        {% endif %}
+    
+    
+
+        {% if image_urls %}
+            <h2>Corresponding Letters:</h2>
+            <div class="images-container">
+                {% for image in image_urls %}
+                    <img src="{{ image }}" alt="Letter Image">
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if message %}
+            <p class="message">{{ message }}</p>
+        {% endif %}
+
+        <a href="#" class="back-btn" onclick="history.back()">Go Back</a>
+        <a href="{% url 'home' %}" class="back-btn" >Home</a>
+    </div>
+
+</body>
+</html>

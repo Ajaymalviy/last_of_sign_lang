@@ -1,0 +1,42 @@
+<!-- speech_to_text.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text</title>
+</head>
+<body>
+    <h1>Speech to Text Recognition</h1>
+    <button onclick="startRecording()">Start Recording</button>
+    <div id="recognizedText"></div>
+    <div id="imageResults"></div>
+
+    <script>
+        function startRecording() {
+            fetch("{% url 'speech_to_text' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ action: "start" })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    document.getElementById('recognizedText').innerText = "Recognized Text: " + data.recognized_text;
+                    let imageResults = document.getElementById('imageResults');
+                    data.data.forEach(item => {
+                        let img = document.createElement('img');
+                        img.src = item.image_url;
+                        imageResults.appendChild(img);
+                    });
+                } else if (data.error) {
+                    alert(data.error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
