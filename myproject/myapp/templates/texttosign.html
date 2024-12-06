@@ -79,7 +79,7 @@
         }
 
         .back-btn:hover {
-            background-color: rgb(56, 141, 168)
+            background-color: rgb(56, 141, 168);
             color: white;
         }
 
@@ -92,14 +92,15 @@
         /* Horizontal Layout for Images */
         .images-container {
             display: flex;
+
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px; /* Space between images */
-            margin-top: 20px;
+            margin-top: 300px;
         }
 
         .images-container img {
-            max-width: 100px;
+            max-width: 500px;
             height: auto;
             border-radius: 8px;
         }
@@ -125,7 +126,7 @@
         {% if gif_url %}
         <h2>Matching GIF:</h2>
         <div class="images-container" style="text-align: center;">
-            <img src="{{ gif_url }}" alt="GIF" style="width: 50vw; height: 50vh; object-fit: contain;">
+            <img src="{{ gif_url }}" alt="GIF">
         </div>
         {% endif %}
     
