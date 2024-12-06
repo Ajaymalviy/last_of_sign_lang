@@ -123,47 +123,64 @@
         };
 
         recognition.onresult = function(event) {
-            const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
-            console.log("Recognized text: ", transcript);
+        const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
+        console.log("Recognized text: ", transcript);
 
-            // Send recognized text to backend for processing
-            fetch("{% url 'speech_to_text' %}", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}' // CSRF Token for POST requests
-                },
-                body: JSON.stringify({ text: transcript }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.gif_url) {
-                    // Display GIF if recognized text matches a GIF
-                    document.getElementById('resultGif').src = data.gif_url;
-                    document.getElementById('resultGif').style.display = 'block';
-                    document.getElementById('resultImage').style.display = 'none';
-                } else if (data.image_urls) {
-                    // Display image(s) if recognized text matches a letter
-                    const images = data.image_urls.map(url => `<img src="${url}" style="width: 100px; margin: 5px;">`).join('');
-                    document.getElementById('result').innerHTML = images;
-                    document.getElementById('resultImage').style.display = 'none';
-                    document.getElementById('resultGif').style.display = 'none';
-                } else {
-                    document.getElementById('result').innerText = data.message || "No result";
-                }
+        // Send recognized text to backend for processing
+        fetch("{% url 'speech_to_text' %}", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}' // CSRF Token for POST requests
+            },
+            body: JSON.stringify({ text: transcript }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.gif_url) {
+                // Display GIF if recognized text matches a GIF
+                document.getElementById('resultGif').src = data.gif_url;
+                document.getElementById('resultGif').style.display = 'block';
+                document.getElementById('resultImage').style.display = 'none';
 
-                // Show Try Again button after processing the result
-                document.getElementById('tryAgainButton').style.display = 'inline-block';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'An error occurred while processing the speech.',
-                });
+                // Hide the "Try Again" button if the gif is shown
+                document.getElementById('tryAgainButton').style.display = 'none';
+                
+                // Optionally, hide the result after a delay (2 seconds) and show letter images
+                setTimeout(() => {
+                    document.getElementById('resultGif').style.display = 'none';  // Hide the gif after 2 seconds
+                    if (data.image_urls) {
+                        // Display image(s) if recognized text matches a letter
+                        const images = data.image_urls.map(url => `<img src="${url}" style="width: 100px; margin: 5px;">`).join('');
+                        document.getElementById('result').innerHTML = images;
+                        document.getElementById('resultImage').style.display = 'none';
+                        document.getElementById('resultGif').style.display = 'none';
+                    }
+                }, 9000); // Wait for 2 seconds before switching to images
+            } else if (data.image_urls) {
+                // Display image(s) if recognized text matches a letter
+                const images = data.image_urls.map(url => `<img src="${url}" style="width: 100px; margin: 5px;">`).join('');
+                document.getElementById('result').innerHTML = images;
+                document.getElementById('resultImage').style.display = 'none';
+                document.getElementById('resultGif').style.display = 'none';
+                document.getElementById('tryAgainButton').style.display = 'inline-block'; // Show try again button
+            } else {
+                document.getElementById('result').innerText = data.message || "No result";
+                document.getElementById('tryAgainButton').style.display = 'inline-block'; // Show try again button
+            }
+
+            // Show Try Again button after processing the result
+            document.getElementById('tryAgainButton').style.display = 'inline-block';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'An error occurred while processing the speech.',
             });
-        };
+        });
+    };
 
         recognition.onerror = function(event) {
             console.error("Recognition error", event);
