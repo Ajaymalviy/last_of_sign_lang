@@ -13,6 +13,7 @@ urlpatterns = [
     path('tryyy/', views.tryyy, name='tryyy'),
     path('text_to_sign/', views.text_to_sign, name='text_to_sign'),
     path('videocheck/', views.videocheck, name='videocheck'),
+    path('capture/', views.capture_video, name='capture_video'),
 
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
