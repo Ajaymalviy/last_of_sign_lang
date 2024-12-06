@@ -77,6 +77,10 @@
     <button onclick="stopCamera()">Stop Camera</button>
     <a href="#" class="back-btn" onclick="history.back()">Go Back</a>
     <a href="{% url 'home' %}" class="back-btn" >Home</a>
+    <br><br>
+    
+    <!-- Start Detection Button -->
+    <button onclick="startDetection()">Start Detection</button>
 </div>
 
 <script>
@@ -108,6 +112,19 @@
     window.onload = function() {
         startCamera();
     };
+
+    // Function to trigger the start of gesture detection (calls capture_video view)
+    function startDetection() {
+        // You can make an AJAX request to the server to start processing the video feed
+        fetch("{% url 'capture_video' %}")
+            .then(response => response.json())
+            .then(data => {
+                console.log("Detection started:", data.message);
+            })
+            .catch(error => {
+                console.log("Error starting detection:", error);
+            });
+    }
 </script>
 
 </body>
