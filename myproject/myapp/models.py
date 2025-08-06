@@ -1,6 +1,7 @@
 # Django's ORM model for User authentication
 from django.db import models
 
+
 class User(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
@@ -9,9 +10,7 @@ class User(models.Model):
     def __str__(self):
         return self.email
 
-from django.db import models
 
-# Example model for MongoDB
 class ISLGif(models.Model):
     phrase = models.CharField(max_length=100, unique=True)
     gif_url = models.CharField(max_length=255)

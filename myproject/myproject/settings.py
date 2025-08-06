@@ -29,10 +29,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # settings.py
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'myapp/static'),  # Pointing to your app's static directory
-# ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
